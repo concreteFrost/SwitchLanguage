@@ -1,0 +1,51 @@
+    public static int index;
+
+    public List<TextList> ToTranslate = new List<TextList>();
+
+    public enum language
+    {
+        english,
+        russian
+    }
+
+    public static language currLanguage;
+
+    public void FixedUpdate()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            currLanguage = language.russian;
+        }
+        ReflectInLanguage(ToTranslate);
+    }
+
+    public  void Russian()
+    {
+        currLanguage = language.russian;
+    }
+
+    public  void English()
+    {
+        currLanguage = language.english;
+    }
+
+    public static void ReflectInLanguage(List<TextList> list)
+    {
+
+        switch (currLanguage)
+        {
+            case language.english:
+                index = 0;
+                break;
+            case language.russian:
+                index = 1;
+                break;
+        }
+
+
+        foreach (var c in list)
+        {
+            c.text.text = c.multiLangSent[index];
+        }
+
+    }
